@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <title>电子画册</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body class="viewer-page">
+  <header class="viewer-top">
+    <a class="back" id="back" href="index.html">‹ 书架</a>
+    <span class="title" id="vTitle">加载中…</span>
+    <span class="spacer"></span>
+    <span class="pageno" id="pageno"></span>
+  </header>
+
+  <div class="stage" id="stage">
+    <div class="book-fit" id="fit"><div id="book"></div></div>
+    <div class="loading" id="loading">正在加载画册…</div>
+  </div>
+
+  <footer class="viewer-bottom">
+    <button class="vbtn" id="prev">上一页</button>
+    <button class="vbtn" id="full">全屏</button>
+    <button class="vbtn" id="next">下一页</button>
+  </footer>
+
+  <script src="assets/page-flip.browser.js"></script>
+  <script src="assets/viewer.js"></script>
+</body>
+</html>

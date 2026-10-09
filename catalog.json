@@ -1,0 +1,24 @@
+{
+  "site": {
+    "title": "企业电子画册",
+    "subtitle": "翻页阅读 · 分类书架"
+  },
+  "updated": "2026-10-09",
+  "categories": [
+    {
+      "id": "shilifenlei",
+      "name": "示例分类",
+      "books": [
+        {
+          "id": "shilifenlei/shilihuace",
+          "title": "示例画册",
+          "category": "shilifenlei",
+          "dir": "books/shilifenlei/shilihuace/",
+          "cover": "books/shilifenlei/shilihuace/cover.webp",
+          "pages": 6,
+          "updated": "2026-10-09"
+        }
+      ]
+    }
+  ]
+}

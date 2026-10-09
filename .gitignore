@@ -1,0 +1,16 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# 构建/部署产物
+deploy/*.tgz
+deploy/*.tar.gz
+*.zip
+
+# 编辑器/系统
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  静态电子画册 · IIS 站点示例配置（Windows Server / IIS + ARR）
+  把本文件另存为站点目录下的 web.config 使用。
+  作用：
+    1) http 强制跳转 https
+    2) 注册 .webp / .json 的 MIME 类型（否则 IIS 不认 webp 会 404）
+    3) 让 /ebooks 走静态文件，其余路径反向代理到后端（示例为 127.0.0.1:8000，可按需删除）
+  将 example.com 换成你自己的域名；不需要反代就把 proxy_to_backend 规则删掉。
+-->
+<configuration>
+    <system.webServer>
+        <httpProtocol>
+            <customHeaders>
+                <remove name="X-Powered-By" />
+            </customHeaders>
+        </httpProtocol>
+        <staticContent>
+            <remove fileExtension=".webp" />
+            <mimeMap fileExtension=".webp" mimeType="image/webp" />
+            <remove fileExtension=".json" />
+            <mimeMap fileExtension=".json" mimeType="application/json" />
+        </staticContent>
+        <rewrite>
+            <rules>
+                <rule name="acme_challenge" stopProcessing="true">
+                    <match url="^\.well-known/acme-challenge/(.*)" />
+                    <action type="Rewrite" url=".well-known/acme-challenge/{R:1}" />
+                </rule>
+                <rule name="http_to_https" stopProcessing="true">
+                    <match url="(.*)" />
+                    <conditions>
+                        <add input="{HTTPS}" pattern="off" />
+                    </conditions>
+                    <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
+                </rule>
+                <!-- /ebooks 作为静态子站，不参与反代 -->
+                <rule name="proxy_to_backend">
+                    <match url="^(?!(ebooks))(.*)" />
+                    <action type="Rewrite" url="http://127.0.0.1:8000/{R:1}" />
+                </rule>
+            </rules>
+        </rewrite>
+    </system.webServer>
+</configuration>
